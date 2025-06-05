@@ -11,11 +11,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class OrderForFavorityTypeTest {
 
-    RecomendationTrainingSession trainingSession = new RecomendationTrainingSession();
+    RecomendationTrainingSession trainingSession = new RecomendationTrainingSession(new OrderForFavorityType(Type.POWER));
 
     @BeforeEach
     void setUp() {
-        trainingSession = new RecomendationTrainingSession();
         trainingSession.addTraining(new Training("Supino",12, Intensity.MODERADO, Type.POWER));
         trainingSession.addTraining(new Training("Agachamento",15, Intensity.INTENSO, Type.FLEXIBILITY));
         trainingSession.addTraining(new Training("Remada",10, Intensity.LEVE, Type.CARDIO));
@@ -23,7 +22,7 @@ class OrderForFavorityTypeTest {
 
     @Test
     void testOrderByBigIntesity(){
-        var listTraining = trainingSession.setStrategy(new OrderForFavorityType(Type.POWER));
+        var listTraining = trainingSession.orderTrainings();
 
         assertEquals("Supino", listTraining.get(0).getName());
         assertEquals(3, listTraining.size());

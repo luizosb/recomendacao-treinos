@@ -11,7 +11,7 @@ import br.com.estudo.strategys.OrderForLessTime;
 public class Main {
     public static void main(String[] args) {
 
-        RecomendationTrainingSession trainingSession = new RecomendationTrainingSession();
+        RecomendationTrainingSession trainingSession = new RecomendationTrainingSession(new OrderForBiggestIntesity());
 
         trainingSession.addTraining(new Training("Supino",12, Intensity.MODERADO, Type.POWER));
         trainingSession.addTraining(new Training("Agachamento",15, Intensity.INTENSO, Type.POWER));
@@ -21,11 +21,13 @@ public class Main {
         trainingSession.addTraining(new Training("Esteira",40, Intensity.LEVE, Type.CARDIO));
 
         System.out.println("====================================================================");
-        trainingSession.setStrategy(new OrderForBiggestIntesity()).forEach(System.out::println);
+        trainingSession.orderTrainings().forEach(System.out::println);
         System.out.println("====================================================================");
-        trainingSession.setStrategy(new OrderForFavorityType(Type.FLEXIBILITY)).forEach(System.out::println);
+        trainingSession.setStrategy(new OrderForFavorityType(Type.FLEXIBILITY));
+        trainingSession.orderTrainings().forEach(System.out::println);
         System.out.println("====================================================================");
-        trainingSession.setStrategy(new OrderForLessTime()).forEach(System.out::println);
+        trainingSession.setStrategy(new OrderForLessTime());
+        trainingSession.orderTrainings().forEach(System.out::println);
         System.out.println("====================================================================");
 
 
